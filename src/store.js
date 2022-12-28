@@ -28,6 +28,7 @@ const reducer = createReducer(initialState, builder => {
         })
 })
 
+
 // Инициализируем store
 export const store = createStore(reducer, initialState)
 
