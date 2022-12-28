@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from "react-redux";
-import {actionCountDecremented, actionCountIncremented, countDecremented, countIncremented, store} from "./store";
+import {actionCountDecremented, actionCountIncremented, store} from "./store";
 import {useEffect, useState} from "react";
 
 function App() {

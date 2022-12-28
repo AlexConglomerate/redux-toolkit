@@ -1,34 +1,37 @@
 import {createStore} from "redux";
-import {createAction, createReducer} from "@reduxjs/toolkit";
+import {createSlice} from "@reduxjs/toolkit";
 
 // начальное состояние
 const initialState = {count: 0}
 
-// список всех actions
-const increment = createAction("count/increment")
-const decrement = createAction("count/decrement")
-// export const countIncremented = "count/increment";
-// export const countDecremented = "count/decrement";
-
-// Шаблоны всех actions
-export const actionCountIncremented = (number) => increment(number)
-export const actionCountDecremented = (number) => decrement(number)
-// export const actionCountIncremented = (number) => ({type: countIncremented, payload: number})
-// export const actionCountDecremented = (number) => ({type: countDecremented, payload: number})
-
-const reducer = createReducer(initialState, builder => {
-    builder
-        .addCase(increment, (state, action) => {
-            state.count++
+// прописываем алгоритм: при каком action как менять состояние
+const calcSlice = createSlice({
+    name: 'count', // первое слово в названии action + '/'
+    initialState,
+    reducers: {
+        increment(state, action) { // increment - название action
+            state.count += action.payload
             return state // без этого в некоторых случаях не сработает
-        })
-        .addCase(decrement, (state, action) => {
-            state.count--
+        },
+        decrement(state, action) {
+            state.count -= action.payload
             return state // без этого в некоторых случаях не сработает
-        })
+        }
+    }
 })
 
+// Шаблоны всех actions
+export const actionCountIncremented = number => increment(number)
+export const actionCountDecremented = number => decrement(number)
+
+const {actions, reducer} = calcSlice
+const {increment, decrement} = actions
+export default reducer
 
 // Инициализируем store
-export const store = createStore(reducer, initialState)
+export const store = createStore(
+    reducer,
+    initialState,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
 
