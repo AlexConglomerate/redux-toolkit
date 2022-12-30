@@ -5,6 +5,7 @@ import {
     actionCountIncrementedClosures, store, actionAsync
 } from "./store";
 import {useEffect, useState} from "react";
+import {getError} from "./errorsReducer";
 
 function App() {
     // const [count, setCount] = useState(store.getState().count);
@@ -18,7 +19,7 @@ function App() {
     // // useSelector - альтернативный способ достать state (альтернатива строчкам выше)
     const count = useSelector(state => state.calc.count)
     const isLoading = useSelector(state => state.calc.isLoading)
-    const error = useSelector(state => state.errors.entities[0])
+    const error = useSelector(getError())
 
     const dispatch = useDispatch() // функция, которая изменяет state
 
