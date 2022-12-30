@@ -15,6 +15,7 @@ function App() {
     //         setCount(store.getState().count)
     //     })
     // }, [])
+    console.log(`123`)
 
     // // useSelector - альтернативный способ достать state (альтернатива строчкам выше)
     const count = useSelector(state => state.calc.count)
